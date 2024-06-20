@@ -1,3 +1,5 @@
+# FitBuddyVerse
+
 To start application:
 - Start phone in Android Studio
 - Go to backend folder (cd .\backend)
