@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "target": "es6",
+        "rootDir": "./",
+        "esModuleInterop": true,
+        "paths": {
+			"@/domain/*": ["./domain/*"],
+			"@/data-access/*": ["./domain/data-access/*"],
+			"@/model/*": ["./domain/model/*"],
+			"@/service/*": ["./service/*"],
+			"@/types/*": ["./types/*"],
+			"*": ["./node_modules/*"]
+		}
+    }
+}

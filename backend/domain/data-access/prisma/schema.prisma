@@ -1,0 +1,79 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model WorkoutComment {
+  id        Int      @id @default(autoincrement())
+  workoutId Int
+  profileId Int
+  message   String
+  createdAt DateTime @default(now())
+  workout   Workout  @relation(fields: [workoutId], references: [id])
+  profile   Profile  @relation(fields: [profileId], references: [id])
+}
+
+model Exercise {
+  id          Int    @id @default(autoincrement())
+  name        String
+  type        String
+  equipment   String
+  description String
+  WorkoutDetails WorkoutDetails[]
+}
+
+model Profile {
+  id             Int              @id @default(autoincrement())
+  email          String           @unique
+  username       String           @unique
+  password       String
+  
+  Workout        Workout[]
+  WorkoutComment WorkoutComment[]
+  following      Profile[]        @relation("ProfileFollows")
+  followedBy     Profile[]        @relation("ProfileFollows")
+  LikedWorkouts  Workout[]        @relation("WorkoutLikes")
+}
+
+model ExerciseSet {
+  id          Int   @id @default(autoincrement())
+  workoutDetailsId  Int
+  setNr       Int
+  repetitions Int
+  weightKG    Float
+
+  WorkoutDetails WorkoutDetails @relation(fields: [workoutDetailsId], references: [id])
+}
+
+model Workout {
+  id             Int              @id @default(autoincrement())
+  name           String
+  createdAt      DateTime         @default(now())
+  durationSec    Int
+  volumeKG       Int
+  profileId      Int
+
+  profile        Profile          @relation(fields: [profileId], references: [id])
+  LikedBy        Profile[]        @relation("WorkoutLikes")
+  WorkoutComment WorkoutComment[]
+
+  WorkoutDetails   WorkoutDetails[]
+}
+
+model WorkoutDetails {
+  id         Int      @id @default(autoincrement())
+  workoutId  Int
+  exerciseId Int
+  note       String?
+  workout    Workout  @relation(fields: [workoutId], references: [id])
+  exercise   Exercise @relation(fields: [exerciseId], references: [id])
+
+  ExerciseSet ExerciseSet[]
+}

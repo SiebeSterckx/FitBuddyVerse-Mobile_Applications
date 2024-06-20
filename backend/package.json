@@ -1,0 +1,40 @@
+{
+    "name": "fitbuddyverse",
+    "version": "1.0.0",
+    "description": "Backend FitBuddyVerse Mobile",
+    "author": "",
+    "license": "ISC",
+    "main": "app.ts",
+    "prisma": {
+        "schema": "domain/data-access/prisma/schema.prisma"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "nodemon -L app.ts --delay 3"
+    },
+    "nodemonConfig": {
+        "ext": "ts",
+        "delay": "3",
+        "execMap": {
+            "ts": "ts-node"
+        }
+    },
+    "dependencies": {
+        "@prisma/client": "^5.7.1",
+        "body-parser": "^1.20.1",
+        "cors": "^2.8.0",
+        "dotenv": "^16.0.0",
+        "express": "^4.18.0",
+        "mysql2": "^3.0.0"
+    },
+    "devDependencies": {
+        "@types/body-parser": "^1.19.0",
+        "@types/express": "^4.17.0",
+        "@types/mysql": "^2.15.0",
+        "@types/node": "^20.0.0",
+        "nodemon": "^3.0.2",
+        "prisma": "^5.7.1",
+        "ts-node": "^10.9.0",
+        "typescript": "^5.3.3"
+    }
+}
